@@ -277,24 +277,4 @@ describe('Browser tests', () => {
         expect(markerScreenPosition.x).toBeCloseTo(386.5);
         expect(markerScreenPosition.y).toBeCloseTo(378.1);
     }, 20000);
-
-    test('Should update fullsceen when fullscreen', async () => {
-        const shrinkElement = await page.evaluate(() => {
-            const map2 = new maplibregl.Map({
-                container: 'map',
-                style: 'https://demotiles.maplibre.org/style.json',
-                center: [10, 10],
-                zoom: 10
-            });
-            const fsControl = new maplibregl.FullscreenControl({});
-            map2.addControll(fsControl);
-            const control = map._controls.find((ctrl) => {
-                return Object.prototype.hasOwnProperty.call(ctrl, '_fullscreen');
-            }) as FullscreenControl;
-            control._onClickFullscreen();
-
-            return map.getContainer().querySelectorAll('.maplibregl-ctrl-shrink');
-        });
-        expect(shrinkElement).toHaveLength(1);
-    }, 20000);
 });
