@@ -3,6 +3,7 @@ import st from 'st';
 import http, {type Server} from 'http';
 import type {AddressInfo} from 'net';
 import type {default as MapLibreGL, Map} from '../../../dist/maplibre-gl';
+import {FullscreenControl} from '../../../dist/maplibre-gl';
 import {sleep} from '../../../src/util/test/util';
 
 const testWidth = 800;
@@ -276,5 +277,19 @@ describe('Browser tests', () => {
 
         expect(markerScreenPosition.x).toBeCloseTo(386.5);
         expect(markerScreenPosition.y).toBeCloseTo(378.1);
+    }, 20000);
+
+    test('Should update fullsceen when fullscreen', async () => {
+        const shrinkElement = await page.evaluate(() => {
+            const fsControl = new FullscreenControl({});
+            map.addControl(fsControl);
+            const control = map._controls.find((ctrl) => {
+                return Object.prototype.hasOwnProperty.call(ctrl, '_fullscreen');
+            }) as FullscreenControl;
+            control._onClickFullscreen();
+
+            return map.getContainer().querySelectorAll('.maplibregl-ctrl-shrink');
+        });
+        expect(shrinkElement).toHaveLength(1);
     }, 20000);
 });
