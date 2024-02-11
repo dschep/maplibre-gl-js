@@ -281,14 +281,8 @@ describe('Browser tests', () => {
 
     test('Should update fullsceen when fullscreen', async () => {
         const shrinkElement = await page.evaluate(() => {
-            const map2 = new maplibregl.Map({
-                container: 'map',
-                style: 'https://demotiles.maplibre.org/style.json',
-                center: [10, 10],
-                zoom: 10
-            });
             const fsControl = new FullscreenControl({});
-            map2.addControl(fsControl);
+            map.addControl(fsControl);
             const control = map._controls.find((ctrl) => {
                 return Object.prototype.hasOwnProperty.call(ctrl, '_fullscreen');
             }) as FullscreenControl;
