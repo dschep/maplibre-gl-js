@@ -2,7 +2,7 @@ import puppeteer, {Page, Browser} from 'puppeteer';
 import st from 'st';
 import http, {type Server} from 'http';
 import type {AddressInfo} from 'net';
-import type {default as MapLibreGL, Map} from '../../../dist/maplibre-gl';
+import type {default as MapLibreGL, Map, FullscreenControl} from '../../../dist/maplibre-gl';
 import {sleep} from '../../../src/util/test/util';
 
 const testWidth = 800;
@@ -286,8 +286,8 @@ describe('Browser tests', () => {
                 center: [10, 10],
                 zoom: 10
             });
-            const fsControl = new maplibregl.FullscreenControl({});
-            map2.addControll(fsControl);
+            const fsControl = new FullscreenControl({});
+            map2.addControl(fsControl);
             const control = map._controls.find((ctrl) => {
                 return Object.prototype.hasOwnProperty.call(ctrl, '_fullscreen');
             }) as FullscreenControl;
