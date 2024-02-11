@@ -2,7 +2,8 @@ import puppeteer, {Page, Browser} from 'puppeteer';
 import st from 'st';
 import http, {type Server} from 'http';
 import type {AddressInfo} from 'net';
-import type {default as MapLibreGL, Map, FullscreenControl} from '../../../dist/maplibre-gl';
+import type {default as MapLibreGL, Map} from '../../../dist/maplibre-gl';
+import {FullscreenControl} from '../../../dist/maplibre-gl';
 import {sleep} from '../../../src/util/test/util';
 
 const testWidth = 800;
